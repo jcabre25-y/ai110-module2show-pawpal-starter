@@ -23,8 +23,7 @@ Yes, my design changed slightly after reviewing the class relationships. At firs
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+One tradeoff my scheduler makes is that its conflict detection only checks for exact matches on the same due date and start time. For example, it will warn me if two tasks are both scheduled at 18:00 on the same day, but it will not detect a partial overlap such as one task running from 18:00 to 18:20 and another starting at 18:10. I considered a more advanced overlap-based algorithm, but I chose the exact-match approach because it is simpler to implement, easier to read, and good enough for a lightweight class project where the main goal is to show useful scheduling logic without making the system too complex too early.
 
 ---
 
