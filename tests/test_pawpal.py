@@ -32,6 +32,54 @@ def test_adding_task_to_pet_increases_task_count() -> None:
     assert len(pet.tasks) == starting_count + 1
 
 
+def test_sort_by_time_returns_tasks_in_chronological_order() -> None:
+    owner = Owner(name="Jordan", available_time_minutes=60)
+    mochi = Pet(name="Mochi", species="dog")
+    today = date.today()
+
+    mochi.add_task(
+        Task(
+            description="Evening walk",
+            duration_minutes=20,
+            frequency="daily",
+            time="18:00",
+            due_date=today,
+            priority="high",
+        )
+    )
+    mochi.add_task(
+        Task(
+            description="Breakfast",
+            duration_minutes=10,
+            frequency="daily",
+            time="07:30",
+            due_date=today,
+            priority="high",
+        )
+    )
+    mochi.add_task(
+        Task(
+            description="Vet reminder",
+            duration_minutes=5,
+            frequency="weekly",
+            time="09:00",
+            due_date=today + timedelta(days=1),
+            priority="medium",
+        )
+    )
+
+    owner.add_pet(mochi)
+    scheduler = Scheduler(owner)
+
+    sorted_tasks = scheduler.sort_by_time(scheduler.retrieve_all_tasks())
+
+    assert [task.description for _, task in sorted_tasks] == [
+        "Breakfast",
+        "Evening walk",
+        "Vet reminder",
+    ]
+
+
 def test_mark_task_complete_creates_next_daily_task() -> None:
     owner = Owner(name="Jordan", available_time_minutes=60)
     pet = Pet(name="Mochi", species="dog")
