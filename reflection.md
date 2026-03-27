@@ -4,13 +4,13 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+My initial design focused on three main actions the user should be able to perform in the app. First, the user should be able to add and manage pet and owner information so the system knows who the schedule is for and can consider basic preferences. Second, the user should be able to create and update pet care tasks such as feeding, walking, medication, grooming, and enrichment, including details like duration and priority. Third, the user should be able to generate and review a daily care schedule that selects tasks based on the available time and priorities, then clearly shows the order of tasks and the reasoning behind the plan.
+
+To support those actions, I chose four main classes: `Owner`, `Pet`, `Task`, and `Scheduler`. The `Owner` class is responsible for storing information about the pet owner, including their name, available time, and general care preferences. The `Pet` class stores basic information about the animal, such as its name and species. The `Task` class represents an individual care activity and holds details like the task title, duration, and priority. The `Scheduler` class is responsible for the planning logic. It takes the owner, pet, and task information and uses it to organize tasks into a daily care schedule. I chose these classes because they separate the data from the scheduling behavior and make the system easier to understand and build.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+Yes, my design changed slightly after reviewing the class relationships. At first, I considered letting the `Owner` class store multiple pets, but the rest of the system was really being designed around planning for one pet at a time. That created a mismatch because the `Scheduler` only worked with a single `Pet`. Based on that feedback, I simplified the design by treating the current version of the app as a single-pet scheduling system. This makes the relationships clearer and keeps the logic easier to implement. I also recognized that if I expand the app later to support multiple pets, I may need to connect tasks more directly to a specific pet or redesign the scheduler to handle a list of pets instead of just one.
 
 ---
 
