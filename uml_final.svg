@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="980" viewBox="0 0 1400 980">
+  <style>
+    .title { font: 700 24px Arial, sans-serif; fill: #17324d; }
+    .box { fill: #f8fbff; stroke: #2c5a7a; stroke-width: 2; rx: 8; ry: 8; }
+    .header { fill: #dbefff; stroke: #2c5a7a; stroke-width: 2; }
+    .name { font: 700 20px Arial, sans-serif; fill: #17324d; }
+    .text { font: 15px Arial, sans-serif; fill: #22313f; }
+    .small { font: 14px Arial, sans-serif; fill: #22313f; }
+    .line { stroke: #2c5a7a; stroke-width: 2.5; fill: none; }
+    .label { font: 14px Arial, sans-serif; fill: #17324d; }
+  </style>
+
+  <text x="50" y="45" class="title">PawPal+ Final UML</text>
+
+  <rect x="50" y="90" width="360" height="280" class="box"/>
+  <rect x="50" y="90" width="360" height="44" class="header"/>
+  <text x="200" y="118" text-anchor="middle" class="name">Task</text>
+  <text x="70" y="160" class="text">+ description: str</text>
+  <text x="70" y="185" class="text">+ duration_minutes: int</text>
+  <text x="70" y="210" class="text">+ frequency: str</text>
+  <text x="70" y="235" class="text">+ time: str</text>
+  <text x="70" y="260" class="text">+ due_date: date</text>
+  <text x="70" y="285" class="text">+ priority: str</text>
+  <text x="70" y="310" class="text">+ completed: bool</text>
+  <text x="70" y="340" class="small">+ mark_complete(), mark_incomplete()</text>
+  <text x="70" y="363" class="small">+ update_details(...)</text>
+
+  <rect x="50" y="430" width="360" height="225" class="box"/>
+  <rect x="50" y="430" width="360" height="44" class="header"/>
+  <text x="230" y="458" text-anchor="middle" class="name">Pet</text>
+  <text x="70" y="500" class="text">+ name: str</text>
+  <text x="70" y="525" class="text">+ species: str</text>
+  <text x="70" y="550" class="text">+ tasks: list&lt;Task&gt;</text>
+  <text x="70" y="580" class="small">+ add_task(), remove_task()</text>
+  <text x="70" y="603" class="small">+ get_tasks(), update_info()</text>
+  <text x="70" y="626" class="small">+ get_summary()</text>
+
+  <rect x="50" y="715" width="360" height="205" class="box"/>
+  <rect x="50" y="715" width="360" height="44" class="header"/>
+  <text x="230" y="743" text-anchor="middle" class="name">Owner</text>
+  <text x="70" y="785" class="text">+ name: str</text>
+  <text x="70" y="810" class="text">+ available_time_minutes: int</text>
+  <text x="70" y="835" class="text">+ preferences: str</text>
+  <text x="70" y="860" class="text">+ pets: list&lt;Pet&gt;</text>
+  <text x="70" y="890" class="small">+ add_pet(), remove_pet()</text>
+  <text x="70" y="913" class="small">+ get_all_tasks(), set_available_time()</text>
+
+  <rect x="560" y="180" width="610" height="430" class="box"/>
+  <rect x="560" y="180" width="610" height="44" class="header"/>
+  <text x="865" y="208" text-anchor="middle" class="name">Scheduler</text>
+  <text x="580" y="250" class="text">+ owner: Owner</text>
+  <text x="580" y="285" class="small">+ retrieve_all_tasks()</text>
+  <text x="580" y="312" class="small">+ get_incomplete_tasks()</text>
+  <text x="580" y="339" class="small">+ sort_by_time(tasks)</text>
+  <text x="580" y="366" class="small">+ filter_tasks(completed, pet_name)</text>
+  <text x="580" y="393" class="small">+ sort_tasks_by_priority(tasks)</text>
+  <text x="580" y="420" class="small">+ detect_conflicts(tasks)</text>
+  <text x="580" y="447" class="small">+ build_daily_plan()</text>
+  <text x="580" y="474" class="small">+ mark_task_complete(pet_name, task_description)</text>
+  <text x="580" y="501" class="small">+ get_plan_summary()</text>
+
+  <path d="M410 545 L510 545 L510 330 L560 330" class="line"/>
+  <text x="445" y="532" class="label">has many</text>
+  <text x="418" y="561" class="label">1</text>
+  <text x="540" y="321" class="label">*</text>
+
+  <path d="M410 817 L500 817 L500 560 L560 560" class="line"/>
+  <text x="430" y="804" class="label">owns many</text>
+  <text x="418" y="833" class="label">1</text>
+  <text x="540" y="577" class="label">*</text>
+
+  <path d="M410 230 L470 230 L470 250 L560 250" class="line"/>
+  <text x="435" y="220" class="label">sorted/updated by</text>
+
+  <path d="M240 370 L240 430" class="line"/>
+  <text x="252" y="404" class="label">contains</text>
+
+  <path d="M885 610 L885 680 L410 680 L410 817" class="line"/>
+  <text x="770" y="668" class="label">uses owner data</text>
+
+  <text x="560" y="655" class="small">Recurring behavior: Scheduler.mark_task_complete()</text>
+  <text x="560" y="678" class="small">calls Task.create_next_occurrence() for daily/weekly tasks.</text>
+</svg>

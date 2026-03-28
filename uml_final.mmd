@@ -1,0 +1,58 @@
+classDiagram
+    class Task {
+        +description: str
+        +duration_minutes: int
+        +frequency: str
+        +time: str
+        +due_date: date
+        +priority: str
+        +completed: bool
+        +mark_complete() None
+        +mark_incomplete() None
+        +update_details(description, duration_minutes, frequency, time, due_date, priority) None
+        +get_priority_value() int
+        +create_next_occurrence() Task|None
+    }
+
+    class Pet {
+        +name: str
+        +species: str
+        +tasks: list~Task~
+        +add_task(task) None
+        +remove_task(task_description) bool
+        +get_tasks() list~Task~
+        +update_info(name, species) None
+        +get_summary() str
+    }
+
+    class Owner {
+        +name: str
+        +available_time_minutes: int
+        +preferences: str
+        +pets: list~Pet~
+        +add_pet(pet) None
+        +remove_pet(pet_name) bool
+        +get_all_tasks() list~tuple~
+        +set_available_time(minutes) None
+        +update_preferences(preferences) None
+    }
+
+    class Scheduler {
+        +owner: Owner
+        +retrieve_all_tasks() list~tuple~
+        +get_incomplete_tasks() list~tuple~
+        +sort_by_time(tasks) list~tuple~
+        +filter_tasks(completed, pet_name) list~tuple~
+        +sort_tasks_by_priority(tasks) list~tuple~
+        +detect_conflicts(tasks) list~str~
+        +build_daily_plan() list~tuple~
+        +mark_task_complete(pet_name, task_description) bool
+        +get_plan_summary() list~str~
+    }
+
+    Owner "1" o-- "*" Pet : owns
+    Pet "1" o-- "*" Task : has
+    Scheduler --> Owner : uses
+    Scheduler --> Pet : reads tasks from
+    Scheduler --> Task : sorts and updates
+    Task ..> Task : creates next occurrence
